@@ -1,0 +1,181 @@
+/* ===== BODY ===== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 15px;
+  background-color: #f4f4f4;
+  line-height: 1.6;
+}
+
+/* ===== HEADER ===== */
+header {
+  text-align: center;
+  background-color: #006400;
+  color: white;
+  padding: 20px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+header h2 {
+  margin: 5px 0 0;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+/* ===== SECTIONS ===== */
+section {
+  background: white;
+  padding: 20px;
+  margin-top: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* TITRES SECTIONS */
+h3 {
+  color: #006400;
+  margin-bottom: 10px;
+}
+
+/* ===== LISTES ===== */
+ul {
+  padding-left: 20px;
+}
+
+ul li {
+  margin-bottom: 8px;
+}
+
+/* ===== TABLEAUX ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  overflow-x: auto;
+  display: block;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #006400;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* ===== LINK BOX ===== */
+.link-box {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 10px;
+  border-left: 5px solid #006400;
+}
+
+/* ===== BOUTONS ===== */
+.btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #006400;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #004d00;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  header h2 {
+    font-size: 1rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+}
+/* ===== MENU FIXE BAS ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #006400;
+  padding: 10px 0;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+.bottom-nav .nav-btn {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-align: center;
+  flex-grow: 1;
+  padding: 5px 0;
+  transition: background-color 0.3s;
+}
+
+.bottom-nav .nav-btn:hover {
+  background-color: #004d00;
+  border-radius: 6px;
+}
+header {
+  text-align: center;
+  background-color: #006400;
+  color: white;
+  padding: 20px 15px;
+  border-radius: 8px;
+}
+
+header .logo {
+  width: 100px;       /* Taille du logo, modifiable */
+  height: auto;
+  margin-bottom: 10px; /* espace entre logo et titre */
+}
+
+/* Ajustement responsive pour mobile */
+@media (max-width: 480px) {
+  header .logo {
+    width: 70px;      /* logo plus petit sur petits écrans */
+  }
+  header h1 {
+    font-size: 20px;
+  }
+  header h2 {
+    font-size: 16px;
+  }
+}
