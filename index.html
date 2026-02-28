@@ -4,17 +4,175 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guide Concours Sénégal</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192.png">
+<link rel="apple-touch-icon" href="images/icons/icon-192.png">
+<meta name="theme-color" content="#007BFF">
 <link rel="stylesheet" href="css/style.css">
 <link rel="manifest" href="manifest.json">
+
+<meta name="description" content="Guide complet pour préparer les concours au Sénégal : conseils, fascicules, inscriptions, CV et lettres de motivation.">
+<meta name="keywords" content="concours Sénégal, préparation concours, fascicules, CV, lettre de motivation">
+
+<style>
+/* ===== Boîte d'accès ===== */
+#accessModal {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#accessModalContent {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+#accessModalContent input {
+    width: 100%;
+    padding: 8px;
+    margin: 15px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
+    font-size: 16px;
+}
+
+#accessModalContent button {
+    padding: 10px 20px;
+    border:none;
+    border-radius:5px;
+    background-color:#004d00;
+    color:white;
+    cursor:pointer;
+    font-size: 16px;
+}
+
+#accessModalContent button:hover {
+    background-color:#004d00;
+}
+
+#errorMsg {
+    color:red;
+    display:none;
+    margin-top:10px;
+    font-weight: bold;
+}
+
+/* ===== Background page ===== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url('images/bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Masquer tout le contenu principal avant validation clé */
+#mainContent { display: none; }
+
+/* ===== Cartes et tableaux ===== */
+.card, table, .service-card, .link-box {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+h1 { margin-bottom: 20px; }
+.card { display: inline-block; width: 200px; padding: 20px; margin: 10px; border: 1px solid #ccc; border-radius: 8px; text-align: center; }
+table { border-collapse: collapse; width: 100%; margin-top: 20px; display:block; overflow-x:auto; }
+th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+
+/* ===== Boutons ===== */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color:#004d00;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover { background-color: #0056b3; }
+
+/* ===== Section Nos Services ===== */
+#services { margin: 50px 0; text-align: center; }
+
+#services h3 { font-size: 28px; margin-bottom: 30px; }
+
+.services-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.service-card {
+    background-color: rgba(255,255,255,0.95);
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.6s;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.service-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.service-card h4 { margin-bottom: 10px; font-size: 20px; color: #007BFF; }
+.service-card p { font-size: 15px; color: #333; }
+
+.contact-btn-container { margin-top: 30px; }
+
+.contact-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #25D366;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.contact-btn:hover { background-color: #128C7E; }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .services-container { flex-direction: column; align-items: center; }
+    .service-card { width: 80%; }
+    .card { width: 80%; margin: 10px auto; }
+    table { font-size: 14px; }
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <!-- Logo -->
-  <img src="images/logo.png" alt="Logo Info Concours" class="logo">
+<!-- Boîte de dialogue clé d'accès -->
+<div id="accessModal" role="dialog" aria-modal="true">
+    <div id="accessModalContent">
+        <h2>🔑 Entrez la clé d'accès</h2>
+        <input type="password" id="userKeyInput" placeholder="Clé d'accès" aria-label="Clé d'accès">
+        <button id="validateKey">Valider</button>
+        <p id="errorMsg">Clé incorrecte ! Veuillez vérifier la clé ou contactez-nous.</p>
+    </div>
+</div>
 
-  <!-- Titres -->
+<div id="mainContent">
+<header>
+  <img src="images/logo.png" alt="Logo Guide Concours Sénégal" class="logo">
   <h1>📘 GUIDE COMPLET</h1>
   <h2>Comment Préparer les Concours au Sénégal</h2>
 </header>
@@ -27,9 +185,7 @@
     <li>Aux grandes écoles</li>
     <li>Aux corps de défense et de sécurité</li>
   </ul>
-
   <p>Chaque année, plusieurs concours sont organisés par l’État et les universités.</p>
-
  <p><strong>Exemples d’institutions connues :</strong></p>
 <ul>
   <li>École Nationale d’Administration (ENA)</li>
@@ -38,7 +194,6 @@
   <li>Gendarmerie Nationale</li>
   <li>Police Nationale</li>
 </ul>
-
   <p><strong>👉 Les places sont limitées, donc la préparation est essentielle.</strong></p>
 </section>
 
@@ -68,47 +223,26 @@
 
 <section>
   <h3>📚 SECTION 4 : Méthode de Révision</h3>
-
   <h4>1️⃣ Étudier les anciennes épreuves</h4>
   <ul>
     <li>Identifier les thèmes fréquents</li>
     <li>Comprendre la structure des sujets</li>
     <li>S’entraîner avec chronomètre</li>
   </ul>
-
   <h4>2️⃣ Utiliser des fascicules</h4>
   <ul>
     <li>Résumés de cours</li>
     <li>Exercices corrigés</li>
     <li>Sujets probables</li>
   </ul>
-
   <h4>3️⃣ Faire un planning</h4>
   <table>
-    <tr>
-      <th>Jour</th>
-      <th>Matière</th>
-    </tr>
-    <tr>
-      <td>Lundi</td>
-      <td>Français</td>
-    </tr>
-    <tr>
-      <td>Mardi</td>
-      <td>Mathématiques</td>
-    </tr>
-    <tr>
-      <td>Mercredi</td>
-      <td>Culture Générale</td>
-    </tr>
-    <tr>
-      <td>Jeudi</td>
-      <td>Droit</td>
-    </tr>
-    <tr>
-      <td>Vendredi</td>
-      <td>Révision générale</td>
-    </tr>
+    <tr><th>Jour</th><th>Matière</th></tr>
+    <tr><td>Lundi</td><td>Français</td></tr>
+    <tr><td>Mardi</td><td>Mathématiques</td></tr>
+    <tr><td>Mercredi</td><td>Culture Générale</td></tr>
+    <tr><td>Jeudi</td><td>Droit</td></tr>
+    <tr><td>Vendredi</td><td>Révision générale</td></tr>
   </table>
 </section>
 
@@ -144,38 +278,100 @@
 
 <section>
   <h3>🚀 Ressources Officielles</h3>
-
   <div class="link-box">
     <h4>🛒 Acheter nos fascicules</h4>
     <p>Préparez vos concours avec nos fascicules complets et corrigés.</p>
-    <a href="https://aidcampusen.mychariow.com/" target="_blank" rel="noopener" class="btn">Acheter maintenant</a>
+    <a href="https://fascicule-disponible.mychariow.shop/" target="_blank" rel="noopener" class="btn">Acheter maintenant</a>
   </div>
-
   <div class="link-box">
-    <h4>💬 Rejoindre le Groupe WhatsApp</h4>
-    <p>Recevez les alertes concours et conseils gratuits.</p>
-    <a href="https://chat.whatsapp.com/KJZXmLMYgSUIOL4eoagTK7?mode=gi_t" target="_blank" rel="noopener" class="btn">Rejoindre le groupe</a>
+    <h4>💬 WhatsApp</h4>
+    <p>Veuillez nous contacter pour plus d'informations.</p>
+    <a href="https://wa.me/221782430538" target="_blank" rel="noopener" class="btn">Rejoindre le groupe</a>
   </div>
-
   <div class="link-box">
     <h4>📢 Suivre la Chaîne Concours</h4>
     <p>Nous publions régulièrement les concours disponibles au Sénégal.</p>
-    <a href="https://whatsapp.com/channel/0029VaelzxUCcW4wusaJnW0s" target="_blank" rel="noopener" class="btn">Suivre la chaîne</a>
+    <a href="https://whatsapp.com/channel/0029VaaQeGeGU3BGUjyCPp25" target="_blank" rel="noopener" class="btn">Suivre la chaîne</a>
+  </div>
+</section>
+
+<section id="services">
+  <h3>💼 Nos Services</h3>
+  <div class="services-container">
+    <div class="service-card">
+      <h4>📘 Vente de fascicules en ligne</h4>
+      <p>Accédez facilement à nos fascicules complets et corrigés pour préparer vos concours.</p>
+    </div>
+    <div class="service-card">
+      <h4>📝 Inscriptions aux concours</h4>
+      <p>Nous vous aidons à vous inscrire correctement aux concours officiels au Sénégal.</p>
+    </div>
+    <div class="service-card">
+      <h4>💼 Création de CV & Lettres de motivation</h4>
+      <p>Obtenez des CV et lettres de motivation professionnels et adaptés à vos besoins.</p>
+    </div>
+  </div>
+  <div class="contact-btn-container">
+    <a href="https://wa.me/221782430538" target="_blank" rel="noopener" class="btn contact-btn" aria-label="Contactez Kenzo sur WhatsApp">
+      📱 Contactez Kenzo sur WhatsApp
+    </a>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 - Concours Sénégal | Application PWA</p>
+  <p>© 2026 - Concours Sénégal | Application PWA | <a href="#">Mentions légales</a></p>
 </footer>
 
-<!-- MENU FIXE BAS -->
 <nav class="bottom-nav">
   <a href="#section1" class="nav-btn">🏠 Guide</a>
-  <a href="https://aidcampusen.mychariow.com/" target="_blank" rel="noopener" class="nav-btn">🛒 Fascicules</a>
-  <a href="https://chat.whatsapp.com/KJZXmLMYgSUIOL4eoagTK7?mode=gi_t" target="_blank" rel="noopener" class="nav-btn">💬 WhatsApp</a>
-  <a href="https://whatsapp.com/channel/0029VaelzxUCcW4wusaJnW0s" target="_blank" rel="noopener" class="nav-btn">📢 Chaîne</a>
+  <a href="https://fascicule-disponible.mychariow.shop/" target="_blank" rel="noopener" class="nav-btn">🛒 Fascicules</a>
+  <a href="https://wa.me/221782430538" target="_blank" rel="noopener" class="nav-btn">💬 WhatsApp</a>
+  <a href="https://whatsapp.com/channel/0029VaaQeGeGU3BGUjyCPp25" target="_blank" rel="noopener" class="nav-btn">📢 Chaîne</a>
 </nav>
 
-<script src="js/app.js"></script>
+<script>
+// ===== Clé d'accès =====
+const ACCESS_KEY = 'CLIENT2026';
+const modal = document.getElementById('accessModal');
+const mainContent = document.getElementById('mainContent');
+const userInput = document.getElementById('userKeyInput');
+const errorMsg = document.getElementById('errorMsg');
+
+userInput.focus();
+
+function validateKey() {
+    const key = userInput.value.trim();
+    if(key === ACCESS_KEY){
+        modal.style.display = 'none';
+        mainContent.style.display = 'block';
+    } else {
+        errorMsg.style.display = 'block';
+    }
+}
+
+document.getElementById('validateKey').addEventListener('click', validateKey);
+userInput.addEventListener('keyup', e => { if(e.key === 'Enter') validateKey(); });
+
+// ===== Animation cartes Nos Services avec IntersectionObserver =====
+const serviceCards = document.querySelectorAll('.service-card');
+const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+            obs.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+serviceCards.forEach(card => observer.observe(card));
+
+// ===== Service Worker PWA =====
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('service-worker.js')
+    .then(reg => console.log('Service Worker enregistré', reg))
+    .catch(err => console.log('Erreur Service Worker', err));
+}
+</script>
+
 </body>
 </html>
